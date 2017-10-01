@@ -1,9 +1,3 @@
-function zip(strand1, strand2) {
-  const s1 = Array.from(strand1);
-  const s2 = Array.from(strand2);
-  return s1.map((el, idx) => [el, s2[idx]]);
-}
-
 class Hamming {
   compute(strand1, strand2) {
     let dist = 0;
@@ -15,8 +9,9 @@ class Hamming {
       return 0;
     }
 
-    zip(strand1, strand2)
-      .forEach((pair) => { if (pair[0] !== pair[1]) dist += 1; });
+    for (let i = 0; i < strand1.length; i += 1) {
+      if (strand1[i] !== strand2[i]) dist += 1;
+    }
 
     return dist;
   }
