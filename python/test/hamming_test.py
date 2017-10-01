@@ -44,6 +44,18 @@ class HammingTest(unittest.TestCase):
     def test_very_large_compute(self):
         self.assertEqual(0, hamming.compute('CAT' * 5000, 'CAT' * 5000))
 
+    def test_enormous_compute(self):
+        self.assertEqual(0, hamming.compute('CAT' * 5000000, 'CAT' * 5000000))
+
+    def test_enormous_compute_in_off_by_one_strand(self):
+        s1 = 'CAT' * 5000000
+        midstring = len(s1) // 2
+        s2 = '{}G{}'.format(
+                        s1[:midstring],
+                        s1[midstring + 1:])
+
+        self.assertEqual(1, hamming.compute(s1, s2))
+
     def test_empty_strands(self):
         self.assertEqual(0, hamming.compute('', ''))
 
